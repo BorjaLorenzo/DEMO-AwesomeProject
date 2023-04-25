@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   boton: {
-    width: '50%',
+    width: '100%',
     marginTop: '5%',
   },
   botonTexto: {
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
 
     borderRadius: 10,
     elevation: 3,
-    width:'150%'
+    width:'auto'
   },
   buttonText: {
     fontSize: 16,
@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
 const { width } = Dimensions.get('window');
 const isMobile = width < 768;
 const deviceType = isMobile ? 'Mobile' : 'Desktop';
+
 const RegisterForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -80,6 +81,8 @@ const RegisterForm = () => {
 
   const handleRegister = () => {
     // Código para enviar los datos del formulario
+    console.log(username);
+    //console.clear();
   };
   var inputPantalla = () => {
     if (deviceType == "Mobile") {
@@ -106,17 +109,19 @@ const RegisterForm = () => {
           style={inputPantalla()}
           placeholder="Usuario"
           value={username}
-          onChangeText={setUsername}
+          onChangeText={(text) => setUsername(text)}
+          autoCapitalize="none"
+          keyboardType="email-address"
         />
         <TextInput
           style={inputPantalla()}
           placeholder="Contraseña"
           value={password}
           onChangeText={setPassword}
+          secureTextEntry={true}
         />
         <View style={styles.boton}>
-          {/* <Button title="Entrar" onPress={handleRegister} style={styles.boton} titleStyle={styles.botonTexto}/> */}
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={handleRegister}>
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
         </View>
